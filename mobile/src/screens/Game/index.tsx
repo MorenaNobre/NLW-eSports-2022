@@ -8,6 +8,7 @@ import { Entypo } from "@expo/vector-icons";
 import { Background } from "../../components/Background";
 import { Heading } from "../../components/Heading";
 import { DuoCard, DuoCardProps } from "../../components/DuoCard";
+import { DuoMatch } from "../../components/DuoMatch";
 
 import { THEME } from "../../theme";
 import { styles } from "./styles";
@@ -15,6 +16,7 @@ import logoImg from "../../assets/logo-nlw-esports.png";
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+  const [discordDuoSelected, setDiscordDuoSelected] = useState("mogs#1982")
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -66,7 +68,7 @@ export function Game() {
           horizontal
           style={styles.containerList}
           contentContainerStyle={[
-            duos.length > 0 ? styles.contentList : styles.emptyListContent
+            duos.length > 0 ? styles.contentList : styles.emptyListContent,
           ]}
           showsHorizontalScrollIndicator={false}
           ListEmptyComponent={() => (
@@ -74,6 +76,12 @@ export function Game() {
               Não há anúncios publicados ainda.
             </Text>
           )}
+        />
+
+        <DuoMatch 
+          visible={discordDuoSelected.length > 0}
+          discord="mogs#mogs"
+          onClose={() => setDiscordDuoSelected("")}
         />
       </SafeAreaView>
     </Background>
